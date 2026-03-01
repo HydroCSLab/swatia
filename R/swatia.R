@@ -1,22 +1,26 @@
 #' Update SWAT+ calibration file
 #'
-#' Modifies the SWAT+ calibration file in the specified directory using
-#' the provided parameter values.
+#' Modifies the SWAT+ calibration file in the specified directory using the
+#' provided parameter values.
 #'
 #' @param dir Character. Path to a SWAT+ TxtInOut_* directory.
-#' @param par_val Numeric vector. Parameter values to write into the
-#'   calibration file.
+#' @param par_val Data frame. Candidate calibration values with columns
+#'   `parameter`, `change_type`, and `value`. `parameter` is a character vector
+#'   of parameter names. `change_type` must be one of c("absval", "abschg",
+#'   "pctchg", "relchg"). `value` is numeric and interpreted according to
+#'   `change_type`.
 #'
 #' @return Invisibly returns NULL.
 #' @keywords internal
 update_calibration_cal <- function(dir, par_val) {
   path <- file.path(dir, "calibration.cal")
   lines <- readLines(path)
-  for (par_name in names(par_val)) {
-    idx <- grep(paste0("^\\s*", par_name, "\\s"), lines)
+  for (i in seq_len(nrow(par_val))) {
+    row <- par_val[i, ]
+    idx <- grep(paste0("^\\s*", row$parameter, "\\s"), lines)
     lines[idx] <- sub(
-      "^(\\s*(?:\\S+\\s+){2})\\S+(.*)$",
-      paste0("\\1", par_val[[par_name]], "\\2"),
+      "^(\\s*\\S+\\s+)\\S+(\\s+)\\S+(.*)$",
+      paste0("\\1", row$change_type, "\\2", row$value, "\\3"),
       lines[idx],
       perl = TRUE
     )
@@ -41,8 +45,8 @@ run_swatplus_in_dir <- function(dir) {
 
 #' Extract simulated discharge
 #'
-#' Reads simulated discharge values for a given channel ID from a SWAT+
-#' output directory.
+#' Reads simulated discharge values for a given channel ID from a SWAT+ output
+#' directory.
 #'
 #' @param dir Character. Path to a SWAT+ TxtInOut_* directory.
 #' @param chaid Integer or character. Channel ID.
@@ -81,8 +85,8 @@ extract_sim <- function(dir, chaid) {
 
 #' Evaluate SWAT+ objective function
 #'
-#' Updates parameters, runs SWAT+, extracts simulated discharge,
-#' computes calibration and validation objective values, and records results.
+#' Updates parameters, runs SWAT+, extracts simulated discharge, computes
+#' calibration and validation objective values, and records results.
 #'
 #' @param x Numeric vector. Normalized parameter values in \code{[0, 1]}.
 #' @param opt List. Runtime options (e.g., worker ID, iteration, run number).
@@ -95,9 +99,15 @@ run_swatplus <- function(x, opt, config) {
 
   x[x < 0] <- 0
   x[x > 1] <- 1
-  par_min <- sapply(config$par, `[`, 1)
-  par_max <- sapply(config$par, `[`, 2)
-  par_val <- par_min + (par_max - par_min) * x
+  par_min <- sapply(config$par, function(x) x$range[1])
+  par_max <- sapply(config$par, function(x) x$range[2])
+
+  par_val <- data.frame(
+    parameter = names(config$par),
+    change_type = vapply(config$par, `[[`, character(1), "change_type"),
+    value = par_min + (par_max - par_min) * x,
+    row.names = NULL
+  )
 
   dir <- sprintf("TxtInOut_%d", opt$worker_id)
   update_calibration_cal(dir, par_val)
@@ -182,12 +192,12 @@ copy_dir <- function(src, dst) {
 
 #' Run ISPSO calibration
 #'
-#' Runs the ISPSO optimization algorithm for SWAT+ parameter calibration
-#' using the provided configuration.
+#' Runs the ISPSO optimization algorithm for SWAT+ parameter calibration using
+#' the provided configuration.
 #'
 #' @param config List. SWATIA configuration object.
-#' @param best_x Numeric vector, optional. Initial parameter vector for
-#'   warm start.
+#' @param best_x Numeric vector, optional. Initial parameter vector for warm
+#'   start.
 #'
 #' @return List. Optimization results.
 #' @export
@@ -283,8 +293,8 @@ get_best_obj <- function(obj_day_txt) {
 
 #' Get best normalized parameter vector
 #'
-#' Returns the normalized parameter vector corresponding to the best
-#' objective value.
+#' Returns the normalized parameter vector corresponding to the best objective
+#' value.
 #'
 #' @param obj_day_txt Character. Path to objective log file.
 #'
@@ -297,8 +307,8 @@ get_best_x <- function(obj_day_txt) {
 
 #' Get best physical parameter values
 #'
-#' Converts the best normalized parameter vector into physical parameter
-#' values using the configuration bounds.
+#' Converts the best normalized parameter vector into physical parameter values
+#' using the configuration bounds.
 #'
 #' @param config List. SWATIA configuration object.
 #' @param obj_day_txt Character. Path to objective log file.
@@ -307,11 +317,66 @@ get_best_x <- function(obj_day_txt) {
 #' @export
 get_best_par <- function(config, obj_day_txt) {
   best_x <- get_best_x(obj_day_txt)
-  par_min <- sapply(config$par, `[`, 1)
-  par_max <- sapply(config$par, `[`, 2)
+  par_min <- sapply(config$par, function(x) x$range[1])
+  par_max <- sapply(config$par, function(x) x$range[2])
   par_val <- par_min + (par_max - par_min) * best_x
   names(par_val) <- names(config$par)
   par_val
+}
+
+#' Load a SWATIA configuration file
+#'
+#' Reads a SWATIA configuration file from disk and returns a validated
+#' configuration object for use in calibration or simulation workflows.
+#'
+#' @param path Character. Path to a SWATIA configuration file to be read and
+#'   parsed.
+#'
+#' @return List. A SWATIA configuration object containing model, parameter, and
+#'   calibration settings.
+#' @export
+load_config <- function(path) {
+  validate_config_par <- function(par) {
+    allowed_change_types <- c("absval", "abschg", "pctchg", "relchg")
+
+    change_types <- vapply(par, `[[`, character(1), "change_type")
+    bad <- which(!change_types %in% allowed_change_types)
+    if (length(bad)) {
+      stop(
+        "Invalid change_type for: ",
+        paste(names(change_types)[bad], collapse = ", "),
+        ". Allowed: ",
+        paste(allowed_change_types, collapse = ", ")
+      )
+    }
+
+    rng_ok <- vapply(
+      par,
+      function(p) is.numeric(p$range) && length(p$range) == 2,
+      logical(1)
+    )
+    if (any(!rng_ok)) {
+      stop(
+        "Invalid range for: ",
+        paste(names(rng_ok)[!rng_ok], collapse = ", "),
+        ". `range` must be numeric length 2."
+      )
+    }
+
+    invisible(TRUE)
+  }
+
+  # Expects config.R to assign `config <- list(...)`
+  e <- new.env(parent = baseenv())
+  sys.source(path, envir = e)
+  if (!exists("config", envir = e, inherits = FALSE)) {
+    stop("Config file must define object `config`")
+  }
+  config <- get("config", envir = e, inherits = FALSE)
+
+  validate_config_par(config$par)
+
+  config
 }
 
 #' SWATIA command-line interface
@@ -391,16 +456,6 @@ Commands:
     list(config = config, cmd = cmd, rest = rest)
   }
 
-  load_config <- function(path) {
-    # Expects config.R to assign `config <- list(...)`
-    e <- new.env(parent = baseenv())
-    sys.source(path, envir = e)
-    if (!exists("config", envir = e, inherits = FALSE)) {
-      stop("Config file must define object `config`")
-    }
-    get("config", envir = e, inherits = FALSE)
-  }
-
   if (length(args) == 0 || any(args %in% c("-h", "--help"))) {
     return(print_usage(0L))
   }
@@ -437,7 +492,7 @@ Commands:
         best_x <- c()
         for (par in names(config$par)) {
           val <- best_par[best_par$par == par, "val"]
-          rng <- config$par[[par]]
+          rng <- config$par[[par]]$range
           best_x <- c(best_x, (val - rng[1]) / (rng[2] - rng[1]))
         }
         best_x <- matrix(best_x, 1)

@@ -20,3 +20,128 @@ remotes::install_git("git@github.com:clawrim/swatia.git")
 # install CLI
 swatia::install_swatia_cli()
 ```
+
+## Usage
+
+```bash
+swatia [options] <command> [args]
+
+Options:
+  -c, --config=PATH    Path to configuration file (default: ./config.R)
+  -h, --help           Show this help message
+
+Commands:
+  run_ispso
+  get_best_obj [obj_day_txt]
+  get_best_x   [obj_day_txt]
+  get_best_par [obj_day_txt]
+```
+
+## Example configuration
+
+```R
+config <- list(
+  par = list(
+    cn2 = list(
+      # HRU; widen upper (was 30)
+      change_type = "pctchg",
+      range = c(-30, 40)
+    ),
+    awc = list(
+      # SOL; widen lower (was -20)
+      change_type = "pctchg",
+      range = c(-40, 20)
+    ),
+    canmx = list(
+      # HRU
+      change_type = "pctchg",
+      range = c(-50, 50)
+    ),
+    esco = list(
+      # HRU; was abschg (-0.2, 0.2)
+      change_type = "absval",
+      range = c(0.00, 1.00)
+    ),
+    alpha = list(
+      # AQU
+      change_type = "absval",
+      range = c(0.01, 0.50)
+    ),
+    flo_min = list(
+      # AQU
+      change_type = "absval",
+      range = c(0, 10)
+    ),
+    deep_seep = list(
+      # AQU
+      change_type = "absval",
+      range = c(0.001, 0.05)
+    ),
+    revap_min = list(
+      # AQU
+      change_type = "absval",
+      range = c(0, 20)
+    ),
+    lat_ttime = list(
+      # HRU
+      change_type = "pctchg",
+      range = c(-50, 50)
+    ),
+    revap_co = list(
+      # AQU
+      change_type = "absval",
+      range = c(0.02, 0.20)
+    ),
+    epco = list(
+      # HRU; was abschg (-0.2, 0.2)
+      change_type = "absval",
+      range = c(0.00, 1.00)
+    ),
+    snofall_tmp = list(
+      # HRU; widen both (was -2, 2)
+      change_type = "abschg",
+      range = c(-5, 5)
+    ),
+    snomelt_tmp = list(
+      # HRU; widen both (was -2, 2)
+      change_type = "abschg",
+      range = c(-5, 5)
+    ),
+    snomelt_max = list(
+      # HRU
+      change_type = "pctchg",
+      range = c(-50, 50)
+    ),
+    snomelt_min = list(
+      # HRU
+      change_type = "pctchg",
+      range = c(-50, 50)
+    ),
+    snomelt_lag = list(
+      # HRU
+      change_type = "pctchg",
+      range = c(-50, 50)
+    )
+  ),
+
+  txtinout = "../TxtInOut",
+  chaid = 55, # USGS gage 13010065
+  #chaid = 196, # USGS gage 13022500
+  #chaid = 143, # USGS gage? Upper Snake outlet
+  obs_day_txt = "../obs_day_13010065.txt",
+  nobs_day_c = 3288,
+
+  sim_dir = "day",
+  obj_day_txt = "obj_day.txt",
+
+  # objective function: 1 - NSE
+  calc_obj = function(obs, sim) {
+    sum((obs - sim)^2) / sum((obs - mean(obs))^2)
+  }
+)
+
+config$control <- ispso::ispso_control(
+  S = ispso::ispso_swarm_size(config$par),
+  maxiter = 30
+)
+```

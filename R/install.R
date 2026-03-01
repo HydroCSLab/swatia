@@ -2,6 +2,7 @@
 #'
 #' @param dir Character. Directory in which to create the \code{swatia}
 #'   symlink. This directory should be included in the user's \code{PATH}.
+#'
 #' @export
 install_swatia_cli <- function(
   dir = file.path(Sys.getenv("HOME"), ".local", "bin")

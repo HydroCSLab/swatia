@@ -1,5 +1,9 @@
 #' Install swatia CLI into PATH
 #'
+#' Creates a symbolic link named \code{swatia} in the specified directory so
+#' that the SWATIA CLI can be invoked from the command line. The target
+#' directory must be included in the user's \code{PATH}.
+#'
 #' @param dir Character. Directory in which to create the \code{swatia}
 #'   symlink. This directory should be included in the user's \code{PATH}.
 #'

@@ -11,5 +11,7 @@ install_swatia_cli(dir = file.path(Sys.getenv("HOME"), ".local", "bin"))
 symlink. This directory should be included in the user's \code{PATH}.}
 }
 \description{
-Install swatia CLI into PATH
+Creates a symbolic link named \code{swatia} in the specified directory so
+that the SWATIA CLI can be invoked from the command line. The target
+directory must be included in the user's \code{PATH}.
 }

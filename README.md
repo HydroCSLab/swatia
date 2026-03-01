@@ -31,7 +31,7 @@ Options:
   -h, --help           Show this help message
 
 Commands:
-  run_ispso
+  run_ispso    [best_par_txt]
   get_best_obj [obj_day_txt]
   get_best_x   [obj_day_txt]
   get_best_par [obj_day_txt]

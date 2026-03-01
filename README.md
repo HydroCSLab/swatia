@@ -16,6 +16,8 @@ The adapter is designed to serve as computational infrastructure within the CLAW
 * [Installation](#installation)
 * [Usage](#usage)
 * [Example configuration](#example-configuration)
+* [Acknowledgments](#acknowledgments)
+* [License](#license)
 
 <!-- vim-markdown-toc -->
 
@@ -153,3 +155,24 @@ config$control <- ispso::ispso_control(
   maxiter = 30
 )
 ```
+
+## Acknowledgments
+
+Development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the [NSF award](https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2308358) and the [USDA award 2025-69012-44233](https://rawcs.nmsu.edu/).
+
+## License
+
+Copyright (C) 2023-2026, Huidae Cho <<https://idea.isnew.info/>>
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <<http://www.gnu.org/licenses/>>.

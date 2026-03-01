@@ -11,6 +11,14 @@ Unlike project-specific scripts, this adapter enforces:
 
 The adapter is designed to serve as computational infrastructure within the CLAWRIM ecosystem, supporting method-driven hydrologic modeling rather than one-off case studies.
 
+<!-- vim-markdown-toc GFM -->
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [Example configuration](#example-configuration)
+
+<!-- vim-markdown-toc -->
+
 ## Installation
 
 ```R

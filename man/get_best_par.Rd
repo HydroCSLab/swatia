@@ -15,6 +15,6 @@ get_best_par(config, obj_day_txt)
 Named numeric vector of parameter values.
 }
 \description{
-Converts the best normalized parameter vector into physical parameter
-values using the configuration bounds.
+Converts the best normalized parameter vector into physical parameter values
+using the configuration bounds.
 }

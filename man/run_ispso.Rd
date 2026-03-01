@@ -9,13 +9,13 @@ run_ispso(config, best_x = NULL)
 \arguments{
 \item{config}{List. SWATIA configuration object.}
 
-\item{best_x}{Numeric vector, optional. Initial parameter vector for
-warm start.}
+\item{best_x}{Numeric vector, optional. Initial parameter vector for warm
+start.}
 }
 \value{
 List. Optimization results.
 }
 \description{
-Runs the ISPSO optimization algorithm for SWAT+ parameter calibration
-using the provided configuration.
+Runs the ISPSO optimization algorithm for SWAT+ parameter calibration using
+the provided configuration.
 }

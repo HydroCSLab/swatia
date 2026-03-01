@@ -13,6 +13,6 @@ get_best_x(obj_day_txt)
 Numeric vector.
 }
 \description{
-Returns the normalized parameter vector corresponding to the best
-objective value.
+Returns the normalized parameter vector corresponding to the best objective
+value.
 }

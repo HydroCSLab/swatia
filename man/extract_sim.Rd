@@ -15,7 +15,7 @@ extract_sim(dir, chaid)
 Numeric vector of simulated discharge values.
 }
 \description{
-Reads simulated discharge values for a given channel ID from a SWAT+
-output directory.
+Reads simulated discharge values for a given channel ID from a SWAT+ output
+directory.
 }
 \keyword{internal}

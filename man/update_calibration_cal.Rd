@@ -9,14 +9,17 @@ update_calibration_cal(dir, par_val)
 \arguments{
 \item{dir}{Character. Path to a SWAT+ TxtInOut_* directory.}
 
-\item{par_val}{Numeric vector. Parameter values to write into the
-calibration file.}
+\item{par_val}{Data frame. Candidate calibration values with columns
+\code{parameter}, \code{change_type}, and \code{value}. \code{parameter} is a character vector
+of parameter names. \code{change_type} must be one of c("absval", "abschg",
+"pctchg", "relchg"). \code{value} is numeric and interpreted according to
+\code{change_type}.}
 }
 \value{
 Invisibly returns NULL.
 }
 \description{
-Modifies the SWAT+ calibration file in the specified directory using
-the provided parameter values.
+Modifies the SWAT+ calibration file in the specified directory using the
+provided parameter values.
 }
 \keyword{internal}

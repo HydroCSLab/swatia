@@ -17,7 +17,7 @@ run_swatplus(x, opt, config)
 Numeric scalar. Calibration objective value.
 }
 \description{
-Updates parameters, runs SWAT+, extracts simulated discharge,
-computes calibration and validation objective values, and records results.
+Updates parameters, runs SWAT+, extracts simulated discharge, computes
+calibration and validation objective values, and records results.
 }
 \keyword{internal}

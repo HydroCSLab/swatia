@@ -10,3 +10,10 @@ Unlike project-specific scripts, this adapter enforces:
 * Clear command-line and R-level interfaces
 
 The adapter is designed to serve as computational infrastructure within the CLAWRIM ecosystem, supporting method-driven hydrologic modeling rather than one-off case studies.
+
+## Installation
+
+```R
+library(remotes)
+remotes::install_github("clawrim/swatia")
+```

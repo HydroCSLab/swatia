@@ -1,0 +1,18 @@
+Package: swatia
+Title: Reusable Adapter Layer for SWAT+ Parameter Calibration Using ISPSO
+Version: 0.1.0
+Authors@R: person("Huidae", "Cho",
+    email = "grass4u@gmail.com", role = c("aut", "cre"))
+Description: Provides a reusable adapter layer that couples SWAT+ with the
+    Isolated-Speciation-Based Particle Swarm Optimization (ISPSO) algorithm for
+    parameter calibration. The framework enables simulation-based optimization
+    by integrating SWAT+ execution, parameter transformation, and objective
+    evaluation within an ISPSO-driven search process. Supports parallel
+    evaluation and reproducible optimization workflows.
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Imports: parallel, parallelly, data.table, ispso
+Remotes:
+    HuidaeCho/ispso

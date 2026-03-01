@@ -14,6 +14,6 @@ The adapter is designed to serve as computational infrastructure within the CLAW
 ## Installation
 
 ```R
-library(remotes)
+install.packages("remotes")
 remotes::install_git("git@github.com:clawrim/swatia.git")
 ```

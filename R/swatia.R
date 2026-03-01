@@ -84,7 +84,7 @@ extract_sim <- function(dir, chaid) {
 #' Updates parameters, runs SWAT+, extracts simulated discharge,
 #' computes calibration and validation objective values, and records results.
 #'
-#' @param x Numeric vector. Normalized parameter values in [0, 1].
+#' @param x Numeric vector. Normalized parameter values in \code{[0, 1]}.
 #' @param opt List. Runtime options (e.g., worker ID, iteration, run number).
 #' @param config List. SWATIA configuration object.
 #'

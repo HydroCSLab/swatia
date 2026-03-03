@@ -162,7 +162,7 @@ Development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the [NSF
 
 ## License
 
-Copyright (C) 2023-2026, Huidae Cho <<https://idea.isnew.info/>>
+Copyright (C) 2023-2026, Huidae Cho <<https://clawrim.isnew.info/>>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

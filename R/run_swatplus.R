@@ -26,7 +26,9 @@ run_swatplus <- function(x, opt, config) {
 
   dir <- sprintf("TxtInOut_%d", opt$worker_id)
   update_calibration_cal(dir, par_val)
+
   run_swatplus_in_dir(dir)
+
   sim_day <- extract_sim(dir, chaid)
   sim_day_c <- sim_day[1:config$nobs_day_c]
   sim_day_v <- sim_day[(config$nobs_day_c + 1):config$nobs_day]

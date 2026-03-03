@@ -158,7 +158,7 @@ config$control <- ispso::ispso_control(
 
 ## Acknowledgments
 
-Development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the [NSF award 2308358](https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2308358) and the [USDA award 2025-69012-44233](https://rawcs.nmsu.edu/).
+The development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the [NSF award 2308358](https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2308358) and the [USDA award 2025-69012-44233](https://rawcs.nmsu.edu/).
 
 ## License
 

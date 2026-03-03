@@ -48,10 +48,6 @@ run_ispso <- function(config, best_x = NULL) {
     cl <- config$control$cluster
   }
 
-  #  parallel::clusterApply(cl, seq_along(cl), function(id) {
-  #    assign("worker_id", id, envir = ispso::.ispso_state)
-  #    NULL
-  #  })
   parallel::clusterExport(
     cl,
     c(

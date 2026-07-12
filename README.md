@@ -1,6 +1,6 @@
 # SWATIA: SWAT+ISPSO Adapter
 
-This repository provides a reusable adapter layer for integrating [SWAT+](https://github.com/swat-model/swatplus) with the [Isolated-Speciation-Based Particle Swarm Optimization (ISPSO)](https://github.com/HuidaeCho/ispso) algorithm.
+This repository provides a reusable adapter layer for integrating [SWAT+](https://github.com/swat-model/swatplus) with the [Isolated-Speciation-Based Particle Swarm Optimization (ISPSO)](https://github.com/HuidaeCho/ispso) algorithm (Cho et al., 2011).
 The goal is to separate model-specific operations from optimization logic, enabling reproducible, transferable calibration workflows across watersheds and projects.
 
 Unlike project-specific scripts, this adapter enforces:
@@ -159,6 +159,10 @@ config$control <- ispso::ispso_control(
 ## Acknowledgments
 
 The development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the [NSF award 2308358](https://www.nsf.gov/awardsearch/show-award/?AWD_ID=2308358) and the [USDA award 2025-69012-44233](https://rawcs.nmsu.edu/).
+
+## References
+
+[Cho, Huidae, Kim, Dongkyun, Olivera, Francisco, Guikema, Seth D., 2011. Enhanced Speciation in Particle Swarm Optimization for Multi-Modal Problems. European Journal of Operational Research 213 (1), 15--23](http://www.sciencedirect.com/science/article/pii/S0377221711001810).
 
 ## License
 

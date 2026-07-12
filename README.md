@@ -9,7 +9,7 @@ Unlike project-specific scripts, this adapter enforces:
 * Reusable workflow structure suitable for multiple study areas
 * Clear command-line and R-level interfaces
 
-The adapter is designed to serve as computational infrastructure within the CLAWRIM ecosystem, supporting method-driven hydrologic modeling rather than one-off case studies.
+The adapter is designed to serve as computational infrastructure within the HydroCS ecosystem, supporting method-driven hydrologic modeling rather than one-off case studies.
 
 <!-- vim-markdown-toc GFM -->
 
@@ -25,7 +25,7 @@ The adapter is designed to serve as computational infrastructure within the CLAW
 
 ```R
 install.packages("remotes")
-remotes::install_git("git@github.com:clawrim/swatia.git")
+remotes::install_git("git@github.com:hydrocslab/swatia.git")
 
 # install CLI
 swatia::install_swatia_cli()
@@ -162,7 +162,7 @@ The development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the 
 
 ## License
 
-Copyright (C) 2023-2026, Huidae Cho <<https://clawrim.isnew.info/>>
+Copyright (C) 2023-2026, Huidae Cho <<https://hydro.isnew.info/>>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

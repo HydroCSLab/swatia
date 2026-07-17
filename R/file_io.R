@@ -33,6 +33,7 @@ update_print_prt <- function(dir, interval) {
 #'
 #' @return Invisibly returns `NULL`. An error is raised if any parameter
 #'   is not found in `calibration.cal`.
+#' @keywords internal
 check_calibration_cal <- function(dir, par_names) {
   path <- file.path(dir, "calibration.cal")
   lines <- readLines(path)

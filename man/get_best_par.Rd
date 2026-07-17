@@ -4,12 +4,12 @@
 \alias{get_best_par}
 \title{Get best physical parameter values}
 \usage{
-get_best_par(config, obj_day_txt)
+get_best_par(config, obj_txt)
 }
 \arguments{
 \item{config}{List. SWATIA configuration object.}
 
-\item{obj_day_txt}{Character. Path to objective log file.}
+\item{obj_txt}{Character. Path to objective log file.}
 }
 \value{
 Named numeric vector of parameter values.

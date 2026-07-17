@@ -17,6 +17,7 @@ The adapter is designed to serve as computational infrastructure within the Hydr
 * [Usage](#usage)
 * [Example configuration](#example-configuration)
 * [Acknowledgments](#acknowledgments)
+* [References](#references)
 * [License](#license)
 
 <!-- vim-markdown-toc -->
@@ -42,9 +43,9 @@ Options:
 
 Commands:
   run_ispso    [best_par_txt]
-  get_best_obj [obj_day_txt]
-  get_best_x   [obj_day_txt]
-  get_best_par [obj_day_txt]
+  get_best_obj [obj_txt]
+  get_best_x   [obj_txt]
+  get_best_par [obj_txt]
 ```
 
 ## Example configuration
@@ -138,11 +139,11 @@ config <- list(
   chaid = 55, # USGS gage 13010065
   #chaid = 196, # USGS gage 13022500
   #chaid = 143, # USGS gage? Upper Snake outlet
-  obs_day_txt = "../obs_day_13010065.txt",
-  nobs_day_c = 3288,
+  obs_txt = "../obs_day_13010065.txt",
+  nobs_c = 3288,
 
   sim_dir = "day",
-  obj_day_txt = "obj_day.txt",
+  obj_txt = "obj_day.txt",
 
   # objective function: 1 - NSE
   calc_obj = function(obs, sim) {

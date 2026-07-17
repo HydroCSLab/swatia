@@ -19,9 +19,9 @@ Options:
 
 Commands:
   run_ispso    [best_par_txt]
-  get_best_obj [obj_day_txt]
-  get_best_x   [obj_day_txt]
-  get_best_par [obj_day_txt]
+  get_best_obj [obj_txt]
+  get_best_x   [obj_txt]
+  get_best_par [obj_txt]
 \n"
     )
     status
@@ -89,10 +89,10 @@ Commands:
   if (pa$cmd == "run_ispso") {
     best_par_txt <- if (length(pa$rest) >= 1) pa$rest[[1]] else NULL
   } else {
-    obj_day_txt <- if (length(pa$rest) >= 1) {
+    obj_txt <- if (length(pa$rest) >= 1) {
       pa$rest[[1]]
     } else {
-      config$obj_day_txt
+      config$obj_txt
     }
   }
 
@@ -120,15 +120,15 @@ Commands:
       0L
     },
     get_best_obj = {
-      cat(get_best_obj(obj_day_txt), sep = "\n")
+      cat(get_best_obj(obj_txt), sep = "\n")
       0L
     },
     get_best_x = {
-      print_list(get_best_x(obj_day_txt))
+      print_list(get_best_x(obj_txt))
       0L
     },
     get_best_par = {
-      print_list(get_best_par(config, obj_day_txt))
+      print_list(get_best_par(config, obj_txt))
       0L
     },
     {

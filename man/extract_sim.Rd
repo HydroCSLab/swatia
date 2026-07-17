@@ -4,10 +4,13 @@
 \alias{extract_sim}
 \title{Extract simulated discharge}
 \usage{
-extract_sim(dir, chaid)
+extract_sim(dir, interval, chaid, sim_txt)
 }
 \arguments{
-\item{dir}{Character. Path to a SWAT+ TxtInOut_* directory.}
+\item{dir}{Character. Path to a TxtInOut_* directory.}
+
+\item{interval}{Character. Output interval used for calibration. One of
+\code{"daily"}, \code{"monthly"}, or \code{"yearly"}.}
 
 \item{chaid}{Integer or character. Channel ID.}
 }
@@ -15,7 +18,7 @@ extract_sim(dir, chaid)
 Numeric vector of simulated discharge values.
 }
 \description{
-Reads simulated discharge values for a given channel ID from a SWAT+ output
+Reads simulated discharge values for a given channel ID from an output
 directory.
 }
 \keyword{internal}

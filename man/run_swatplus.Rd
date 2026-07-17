@@ -2,7 +2,7 @@
 % Please edit documentation in R/run_swatplus.R
 \name{run_swatplus}
 \alias{run_swatplus}
-\title{Evaluate SWAT+ objective function}
+\title{Evaluate the objective function}
 \usage{
 run_swatplus(x, opt, config)
 }

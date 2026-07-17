@@ -1,4 +1,4 @@
-#' Evaluate SWAT+ objective function
+#' Evaluate the objective function
 #'
 #' Updates parameters, runs SWAT+, extracts simulated discharge, computes
 #' calibration and validation objective values, and records results.
@@ -10,8 +10,6 @@
 #' @return Numeric scalar. Calibration objective value.
 #' @keywords internal
 run_swatplus <- function(x, opt, config) {
-  chaid <- sprintf("cha%03d", config$chaid)
-
   x[x < 0] <- 0
   x[x > 1] <- 1
   par_min <- sapply(config$par, function(x) x$range[1])
@@ -29,31 +27,28 @@ run_swatplus <- function(x, opt, config) {
 
   run_swatplus_in_dir(dir)
 
-  sim_day <- extract_sim(dir, chaid)
-  sim_day_c <- sim_day[1:config$nobs_day_c]
-  sim_day_v <- sim_day[(config$nobs_day_c + 1):config$nobs_day]
-  obj_day_c <- config$calc_obj(config$obs_day_c, sim_day_c)
-  obj_day_v <- config$calc_obj(config$obs_day_v, sim_day_v)
+  interval <- config$interval
+  chaid <- sprintf("cha%03d", config$chaid)
 
-  x <- paste(x, collapse = ",")
+  suffix <- switch(interval, daily = "day", monthly = "mon", yearly = "yr")
+  sim_txt <- sprintf("%s/sim_%s_%05d.txt", config$sim_dir, suffix, opt$run)
+
+  sim <- extract_sim(dir, interval, chaid, sim_txt)
+  sim_c <- sim[1:config$nobs_c]
+  sim_v <- sim[(config$nobs_c + 1):config$nobs]
+  obj_c <- config$calc_obj(config$obs_c, sim_c)
+  obj_v <- config$calc_obj(config$obs_v, sim_v)
+
   utils::write.table(
-    sprintf("%d,%f,%f,%s", opt$run, obj_day_c, obj_day_v, x),
-    config$obj_day_txt,
+    sprintf("%d,%f,%f,%s", opt$run, obj_c, obj_v, paste(x, collapse = ",")),
+    config$obj_txt,
     quote = FALSE,
     row.names = FALSE,
     col.names = FALSE,
     append = TRUE
   )
 
-  sim_day <- utils::read.table(sprintf("%s/sim_day.txt", dir))[[1]]
-  utils::write.table(
-    sim_day,
-    sprintf("%s/sim_%05d_day.txt", config$sim_dir, opt$run),
-    row.names = FALSE,
-    col.names = FALSE
-  )
-
-  obj_day_c
+  obj_c
 }
 
 #' Run SWAT+ in a directory

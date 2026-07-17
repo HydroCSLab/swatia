@@ -10,7 +10,7 @@
 #'   calibration settings.
 #' @export
 load_config <- function(path) {
-  validate_config_par <- function(par) {
+  validate_par <- function(par) {
     allowed_change_types <- c("absval", "abschg", "pctchg", "relchg")
 
     change_types <- vapply(par, `[[`, character(1), "change_type")
@@ -40,6 +40,19 @@ load_config <- function(path) {
     invisible(TRUE)
   }
 
+  validate_interval <- function(interval) {
+    allowed_intervals <- c("daily", "monthly", "yearly")
+    if (!interval %in% allowed_intervals) {
+      stop(
+        "Invalid interval: ",
+        interval,
+        ". Allowed: ",
+        paste(allowed_intervals, collapse = ", ")
+      )
+    }
+    invisible(TRUE)
+  }
+
   # Expects config.R to assign `config <- list(...)`
   e <- new.env(parent = baseenv())
   sys.source(path, envir = e)
@@ -48,7 +61,8 @@ load_config <- function(path) {
   }
   config <- get("config", envir = e, inherits = FALSE)
 
-  validate_config_par(config$par)
+  validate_par(config$par)
+  validate_interval(config$interval)
 
   config
 }

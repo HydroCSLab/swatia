@@ -4,10 +4,10 @@
 \alias{get_best}
 \title{Get best optimization record}
 \usage{
-get_best(obj_day_txt)
+get_best(obj_txt)
 }
 \arguments{
-\item{obj_day_txt}{Character. Path to objective log file.}
+\item{obj_txt}{Character. Path to objective log file.}
 }
 \value{
 Data frame containing the best record.

@@ -4,10 +4,10 @@
 \alias{get_best_obj}
 \title{Get best objective value}
 \usage{
-get_best_obj(obj_day_txt)
+get_best_obj(obj_txt)
 }
 \arguments{
-\item{obj_day_txt}{Character. Path to objective log file.}
+\item{obj_txt}{Character. Path to objective log file.}
 }
 \value{
 Numeric scalar.

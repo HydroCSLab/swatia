@@ -2,12 +2,12 @@
 % Please edit documentation in R/file_io.R
 \name{update_calibration_cal}
 \alias{update_calibration_cal}
-\title{Update SWAT+ calibration file}
+\title{Update the \code{calibration.cal} file}
 \usage{
 update_calibration_cal(dir, par_val)
 }
 \arguments{
-\item{dir}{Character. Path to a SWAT+ TxtInOut_* directory.}
+\item{dir}{Character. Path to a TxtInOut_* directory.}
 
 \item{par_val}{Data frame. Candidate calibration values with columns
 \code{parameter}, \code{change_type}, and \code{value}. \code{parameter} is a character vector
@@ -19,7 +19,7 @@ of parameter names. \code{change_type} must be one of c("absval", "abschg",
 Invisibly returns NULL.
 }
 \description{
-Modifies the SWAT+ calibration file in the specified directory using the
+Modifies the \code{calibration.cal} file in the specified directory using the
 provided parameter values.
 }
 \keyword{internal}

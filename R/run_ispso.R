@@ -10,13 +10,13 @@
 #' @return List. Optimization results.
 #' @export
 run_ispso <- function(config, best_x = NULL) {
-  obs_day <- utils::read.table(config$obs_day_txt)[[1]]
+  obs <- utils::read.table(config$obs_txt)[[1]]
 
-  config$nobs_day <- length(obs_day)
-  stopifnot(config$nobs_day_c < config$nobs_day)
+  config$nobs <- length(obs)
+  stopifnot(config$nobs_c < config$nobs)
 
-  config$obs_day_c <- obs_day[1:config$nobs_day_c]
-  config$obs_day_v <- obs_day[(config$nobs_day_c + 1):config$nobs_day]
+  config$obs_c <- obs[1:config$nobs_c]
+  config$obs_v <- obs[(config$nobs_c + 1):config$nobs]
 
   reset_dir(config$sim_dir)
   unlink(Sys.glob("TxtInOut_*"), recursive = FALSE, force = TRUE)
@@ -24,16 +24,20 @@ run_ispso <- function(config, best_x = NULL) {
   nworkers <- min(config$control$S, parallelly::availableCores())
   ndim <- length(config$par)
 
+  check_calibration_cal(config$txtinout)
+
   for (i in seq_len(nworkers)) {
-    copy_dir(config$txtinout, sprintf("TxtInOut_%d", i))
+    txtinout <- sprintf("TxtInOut_%d", i)
+    copy_dir(config$txtinout, txtinout)
+    update_print_prt(txtinout, config$interval)
   }
 
   utils::write.table(
     sprintf(
-      "run,obj_day_c,obj_day_v,%s",
-      paste(paste("x", 1:ndim, sep = ""), collapse = ",")
+      "run,obj_c,obj_v,%s",
+      paste(paste0("x", 1:ndim), collapse = ",")
     ),
-    config$obj_day_txt,
+    config$obj_txt,
     quote = FALSE,
     row.names = FALSE,
     col.names = FALSE

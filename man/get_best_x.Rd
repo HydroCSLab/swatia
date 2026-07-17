@@ -4,10 +4,10 @@
 \alias{get_best_x}
 \title{Get best normalized parameter vector}
 \usage{
-get_best_x(obj_day_txt)
+get_best_x(obj_txt)
 }
 \arguments{
-\item{obj_day_txt}{Character. Path to objective log file.}
+\item{obj_txt}{Character. Path to objective log file.}
 }
 \value{
 Numeric vector.

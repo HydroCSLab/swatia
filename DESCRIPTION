@@ -1,6 +1,6 @@
 Package: swatia
 Title: Reusable Adapter Layer for SWAT+ Parameter Calibration Using ISPSO
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Huidae", "Cho",
     email = "grass4u@gmail.com", role = c("aut", "cre"))
 Description: Provides a reusable adapter layer that couples SWAT+ with the

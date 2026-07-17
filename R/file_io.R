@@ -37,7 +37,7 @@ check_calibration_cal <- function(dir, par_names) {
   path <- file.path(dir, "calibration.cal")
   lines <- readLines(path)
 
-  parameters <- sub("^\\s*(\\^S+).*$", "\\1", lines)
+  parameters <- sub("^\\s*(\\S+).*$", "\\1", lines)
   bad <- which(!par_names %in% parameters)
 
   if (length(bad)) {

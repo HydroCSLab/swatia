@@ -164,7 +164,7 @@ The development of the SWAT+ISPSO Adapter (SWATIA) was supported in part by the 
 
 ## References
 
-[Cho, Huidae, Kim, Dongkyun, Olivera, Francisco, Guikema, Seth D., 2011. Enhanced Speciation in Particle Swarm Optimization for Multi-Modal Problems. European Journal of Operational Research 213 (1), 15--23](https://doi.org/10.1016/j.ejor.2011.02.026).
+[Cho, H., Kim, D., Olivera, F., Guikema, S. D., 2011. Enhanced Speciation in Particle Swarm Optimization for Multi-Modal Problems. European Journal of Operational Research 213 (1), 15--23](https://doi.org/10.1016/j.ejor.2011.02.026).
 
 ## License
 

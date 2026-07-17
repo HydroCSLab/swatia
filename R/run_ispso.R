@@ -24,7 +24,7 @@ run_ispso <- function(config, best_x = NULL) {
   nworkers <- min(config$control$S, parallelly::availableCores())
   ndim <- length(config$par)
 
-  check_calibration_cal(config$txtinout)
+  check_calibration_cal(config$txtinout, names(config$par))
 
   for (i in seq_len(nworkers)) {
     txtinout <- sprintf("TxtInOut_%d", i)

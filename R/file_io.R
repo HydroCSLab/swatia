@@ -5,7 +5,7 @@
 #'
 #' @param dir Character. Path to a TxtInOut_* directory.
 #' @param interval Character. Output interval to enable. One of `"daily"`,
-#'   `"monthly"`, or `"yearly"`.
+#'	 `"monthly"`, or `"yearly"`.
 #'
 #' @return Invisibly returns NULL.
 #' @keywords internal
@@ -28,22 +28,22 @@ update_print_prt <- function(dir, interval) {
 #' `calibration.cal`.
 #'
 #' @param dir Character. Path to a TxtInOut_* directory.
-#' @param par_val Data frame of calibration parameters. The `parameter`
-#'   column is checked against `calibration.cal`.
+#' @param par_names Character vector. Parameter names checked against
+#'   `calibration.cal`.
 #'
 #' @return Invisibly returns `NULL`. An error is raised if any parameter
 #'   is not found in `calibration.cal`.
-check_calibration_cal <- function(dir, par_val) {
+check_calibration_cal <- function(dir, par_names) {
   path <- file.path(dir, "calibration.cal")
   lines <- readLines(path)
 
   parameters <- sub("^\\s*(\\^S+).*$", "\\1", lines)
-  bad <- which(!par_val$parameter %in% parameters)
+  bad <- which(!par_names %in% parameters)
 
   if (length(bad)) {
     stop(
       "Parameters not found in calibration.cal: ",
-      paste(par_val$parameter[bad], collapse = ", ")
+      paste(par_names[bad], collapse = ", ")
     )
   }
 }
@@ -84,7 +84,7 @@ update_calibration_cal <- function(dir, par_val) {
 #'
 #' @param dir Character. Path to a TxtInOut_* directory.
 #' @param interval Character. Output interval used for calibration. One of
-#' `"daily"`, `"monthly"`, or `"yearly"`.
+#'   `"daily"`, `"monthly"`, or `"yearly"`.
 #' @param chaid Integer or character. Channel ID.
 #'
 #' @return Numeric vector of simulated discharge values.

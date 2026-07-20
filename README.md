@@ -158,7 +158,7 @@ config <- within(config, {
   ),
   fmt_sim_txt <- function(run){
     suffix <- switch(interval, daily = "day", monthly = "mon", yearly = "yr")
-    sprintf("sim/sim-%s-%d.txt", suffix, run)
+    sprintf("sim/sim-%s-%05d.txt", suffix, run)
   }
 })
 ```

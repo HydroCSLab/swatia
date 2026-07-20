@@ -42,10 +42,10 @@ Options:
   -h, --help           Show this help message
 
 Commands:
-  run_ispso    [best_par_txt]
-  get_best_obj [obj_txt]
-  get_best_x   [obj_txt]
-  get_best_par [obj_txt]
+  run-ispso    [best_par.txt]
+  get-best-obj [obj.txt]
+  get-best-x   [obj.txt]
+  get-best-par [obj.txt]
 ```
 
 ## Example configuration

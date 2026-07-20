@@ -69,7 +69,7 @@ Commands:
     if (length(args) < 1) {
       stop("Missing subcommand")
     }
-    cmd <- args[[1]]
+    cmd <- chartr("-", "_", args[[1]])
     rest <- args[-1]
 
     list(config = config, cmd = cmd, rest = rest)
@@ -86,7 +86,7 @@ Commands:
     stop("Too many arguments")
   }
 
-  if (pa$cmd == "run-ispso") {
+  if (pa$cmd == "run_ispso") {
     best_par_txt <- if (length(pa$rest) >= 1) pa$rest[[1]] else NULL
   } else {
     obj_txt <- if (length(pa$rest) >= 1) {

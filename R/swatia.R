@@ -18,10 +18,10 @@ Options:
   -h, --help           Show this help message
 
 Commands:
-  run_ispso    [best_par_txt]
-  get_best_obj [obj_txt]
-  get_best_x   [obj_txt]
-  get_best_par [obj_txt]
+  run-ispso    [best_par.txt]
+  get-best-obj [obj.txt]
+  get-best-x   [obj.txt]
+  get-best-par [obj.txt]
 \n"
     )
     status
@@ -86,7 +86,7 @@ Commands:
     stop("Too many arguments")
   }
 
-  if (pa$cmd == "run_ispso") {
+  if (pa$cmd == "run-ispso") {
     best_par_txt <- if (length(pa$rest) >= 1) pa$rest[[1]] else NULL
   } else {
     obj_txt <- if (length(pa$rest) >= 1) {

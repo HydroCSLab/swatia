@@ -42,7 +42,7 @@ Options:
   -h, --help           Show this help message
 
 Commands:
-  run-ispso    [best_par.txt]
+  run-ispso    [best-par.txt]
   get-best-obj [obj.txt]
   get-best-x   [obj.txt]
   get-best-par [obj.txt]

@@ -143,7 +143,6 @@ config <- list(
   obs_txt = "../obs-day-13010065.txt",
   num_obs_c = 3288,
 
-  sim_dir = "sim",
   obj_txt = "obj-day.txt",
 
   # objective function: 1 - NSE
@@ -152,9 +151,15 @@ config <- list(
   }
 )
 
-config$control <- ispso::ispso_control(
-  S = ispso::ispso_swarm_size(config$par),
-  maxiter = 30
+config <- within(config, {
+  control <- ispso::ispso_control(
+    S = ispso::ispso_swarm_size(par),
+    maxiter = 30
+  },
+  fmt_sim_txt <- function(run){
+    suffix <- switch(interval, daily = "day", monthly = "mon", yearly = "yr")
+    sprintf("sim/sim-%s-%d.txt", suffix, run)
+  }
 )
 ```
 

@@ -18,7 +18,6 @@ run_ispso <- function(config, best_x = NULL) {
   config$obs_c <- obs[1:config$num_obs_c]
   config$obs_v <- obs[(config$num_obs_c + 1):config$num_obs]
 
-  reset_dir(config$sim_dir)
   unlink(Sys.glob("TxtInOut_*"), recursive = FALSE, force = TRUE)
 
   nworkers <- min(config$control$S, parallelly::availableCores())

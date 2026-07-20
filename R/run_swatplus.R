@@ -31,7 +31,7 @@ run_swatplus <- function(x, opt, config) {
   chaid <- sprintf("cha%03d", config$chaid)
 
   suffix <- switch(interval, daily = "day", monthly = "mon", yearly = "yr")
-  sim_txt <- sprintf("%s/sim_%s_%05d.txt", config$sim_dir, suffix, opt$run)
+  sim_txt <- config$fmt_sim_txt(opt$run)
 
   sim <- extract_sim(dir, interval, chaid, sim_txt)
   sim_c <- sim[1:config$num_obs_c]

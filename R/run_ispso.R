@@ -12,11 +12,11 @@
 run_ispso <- function(config, best_x = NULL) {
   obs <- utils::read.table(config$obs_txt)[[1]]
 
-  config$nobs <- length(obs)
-  stopifnot(config$nobs_c < config$nobs)
+  config$num_obs <- length(obs)
+  stopifnot(config$num_obs_c < config$num_obs)
 
-  config$obs_c <- obs[1:config$nobs_c]
-  config$obs_v <- obs[(config$nobs_c + 1):config$nobs]
+  config$obs_c <- obs[1:config$num_obs_c]
+  config$obs_v <- obs[(config$num_obs_c + 1):config$num_obs]
 
   reset_dir(config$sim_dir)
   unlink(Sys.glob("TxtInOut_*"), recursive = FALSE, force = TRUE)

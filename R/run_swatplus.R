@@ -34,8 +34,8 @@ run_swatplus <- function(x, opt, config) {
   sim_txt <- sprintf("%s/sim_%s_%05d.txt", config$sim_dir, suffix, opt$run)
 
   sim <- extract_sim(dir, interval, chaid, sim_txt)
-  sim_c <- sim[1:config$nobs_c]
-  sim_v <- sim[(config$nobs_c + 1):config$nobs]
+  sim_c <- sim[1:config$num_obs_c]
+  sim_v <- sim[(config$num_obs_c + 1):config$num_obs]
   obj_c <- config$calc_obj(config$obs_c, sim_c)
   obj_v <- config$calc_obj(config$obs_v, sim_v)
 

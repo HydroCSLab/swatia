@@ -140,11 +140,11 @@ config <- list(
   #chaid = 196, # USGS gage 13022500
   #chaid = 143, # USGS gage? Upper Snake outlet
   interval = "daily",
-  obs_txt = "../obs_day_13010065.txt",
-  nobs_c = 3288,
+  obs_txt = "../obs-day-13010065.txt",
+  num_obs_c = 3288,
 
   sim_dir = "sim",
-  obj_txt = "obj_day.txt",
+  obj_txt = "obj-day.txt",
 
   # objective function: 1 - NSE
   calc_obj = function(obs, sim) {

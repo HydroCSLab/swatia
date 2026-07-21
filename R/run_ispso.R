@@ -34,7 +34,7 @@ run_ispso <- function(config, best_x = NULL) {
   utils::write.table(
     sprintf(
       "run,obj_c,obj_v,%s",
-      paste(paste0("x", 1:ndim), collapse = ",")
+      paste(paste0("x_", names(config$par)), collapse = ",")
     ),
     config$obj_txt,
     quote = FALSE,

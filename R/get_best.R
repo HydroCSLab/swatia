@@ -35,7 +35,7 @@ get_best_obj <- function(obj_txt) {
 #' @export
 get_best_x <- function(obj_txt) {
   best <- get_best(obj_txt)
-  best[, startsWith(names(best), "x")]
+  best[, startsWith(names(best), "x_")]
 }
 
 #' Get best physical parameter values

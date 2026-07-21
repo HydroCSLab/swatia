@@ -151,13 +151,14 @@ config <- list(
   }
 )
 
+suffix <- switch(config$interval, daily = "day", monthly = "mon", yearly = "yr")
+
 config <- within(config, {
   control <- ispso::ispso_control(
     S = ispso::ispso_swarm_size(par),
     maxiter = 30
   )
   fmt_sim_txt <- function(run){
-    suffix <- switch(interval, daily = "day", monthly = "mon", yearly = "yr")
     sprintf("sim/sim-%s-%05d.txt", suffix, run)
   }
 })
